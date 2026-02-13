@@ -12,21 +12,24 @@ from typing import Optional
 class TetrisGame:
     """Main Tetris game controller."""
     
-    FALL_SPEED_INITIAL = 30
-    FALL_SPEED_MIN = 5
-    FALL_SPEED_DECREASE = 4
+    FALL_SPEED_TABLE = [
+        48, 43, 38, 33, 28, 23, 18, 13, 8, 6,
+        5, 5, 5, 4, 4, 4, 3, 3, 3, 2,
+        2, 2, 2, 2, 2, 2, 2, 2, 2, 1,
+    ]
     MOVE_DELAY = 8
     INITIAL_MOVE_DELAY = 15
-    LOCK_DELAY = 30
-    LOCK_DELAY_EXTENSION = 10
+    LOCK_DELAY = 15
+    LOCK_DELAY_EXTENSION = 5
     
-    def __init__(self, board_width: int = 10, board_height: int = 20):
+    def __init__(self, board_width: int = 10, board_height: int = 20, start_level: int = 1):
         """
         Initialize the game.
         
         Args:
             board_width: Width of the game board
             board_height: Height of the game board
+            start_level: Starting level for testing
         """
         self.board = Board(board_width, board_height)
         self.current_piece: Optional[Tetromino] = None
@@ -36,8 +39,9 @@ class TetrisGame:
         
         self.score = 0
         self.high_score = 0
-        self.lines_cleared = 0
-        self.level = 1
+        self.start_level = max(1, start_level)
+        self.lines_cleared = (self.start_level - 1) * 10
+        self.level = self.start_level
         self.game_over = False
         self.paused = False
         self.combo = 0
@@ -57,7 +61,7 @@ class TetrisGame:
         self.jump_scare_active = False
         self.jump_scare_timer = 0
         self.fall_counter = 0
-        self.fall_speed = self.FALL_SPEED_INITIAL
+        self.fall_speed = self.calculate_fall_speed(self.level)
         
         self.move_left_counter = 0
         self.move_right_counter = 0
@@ -276,10 +280,7 @@ class TetrisGame:
             if self.level > old_level:
                 self.level_up_timer = 90
             
-            self.fall_speed = max(
-                self.FALL_SPEED_MIN,
-                self.FALL_SPEED_INITIAL - (self.level - 1) * self.FALL_SPEED_DECREASE
-            )
+            self.fall_speed = self.calculate_fall_speed(self.level)
             
             for y in full_lines:
                 for x in range(0, self.board.width, 3):
@@ -407,12 +408,12 @@ class TetrisGame:
         if self.score > self.high_score:
             self.high_score = self.score
         self.score = 0
-        self.lines_cleared = 0
-        self.level = 1
+        self.lines_cleared = (self.start_level - 1) * 10
+        self.level = self.start_level
         self.game_over = False
         self.paused = False
         self.fall_counter = 0
-        self.fall_speed = self.FALL_SPEED_INITIAL
+        self.fall_speed = self.calculate_fall_speed(self.level)
         self.combo = 0
         self.clearing_lines = []
         self.clear_animation_timer = 0
@@ -433,3 +434,8 @@ class TetrisGame:
         self.jump_scare_timer = 0
         self.next_piece = None
         self.spawn_new_piece()
+
+    def calculate_fall_speed(self, level: int) -> int:
+        """Calculate fall speed using NES-style frames-per-row table."""
+        index = max(0, min(level - 1, len(self.FALL_SPEED_TABLE) - 1))
+        return self.FALL_SPEED_TABLE[index]
