@@ -1,0 +1,29 @@
+version = 1
+revision = 3
+requires-python = ">=3.12"
+
+[[package]]
+name = "pyxel"
+version = "2.6.5"
+source = { registry = "https://pypi.org/simple" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/2c/ec/8b6b0326ce29cde39fa6179423f7fe6f03bdfca9fc02d2b2a59a41223f1a/pyxel-2.6.5-cp38-abi3-macosx_10_12_x86_64.whl", hash = "sha256:9f2d52075c2fb6fb53b6f1bdfa6105245546799db9ea910be9625052dfad2bd1", size = 7088579, upload-time = "2026-02-11T14:12:32.218Z" },
+    { url = "https://files.pythonhosted.org/packages/7c/ab/61299c53918184b64acf5674583a428c867bf4ec6799013801c0e86f6fde/pyxel-2.6.5-cp38-abi3-macosx_11_0_arm64.whl", hash = "sha256:24a2c72a9e9d1b2f92193ea38060401ef866fc9b8c8c46cacde9954101431d01", size = 6844534, upload-time = "2026-02-11T14:12:34.672Z" },
+    { url = "https://files.pythonhosted.org/packages/e3/83/4ee466700d121c0b57aa6003b12fbaa5e0deba8bb0880b16ccc6a29d859d/pyxel-2.6.5-cp38-abi3-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:fc6d2fadb44abb32ecc9ad67acaa30715ff0fcc22e62763fc01adf16acd911be", size = 6728143, upload-time = "2026-02-11T14:12:35.912Z" },
+    { url = "https://files.pythonhosted.org/packages/41/94/a22bf2bd932f09799b6262f19223ed3da5c0dcc0baee7c41be5a31c06c68/pyxel-2.6.5-cp38-abi3-manylinux_2_17_armv7l.manylinux2014_armv7l.whl", hash = "sha256:fba56c80813494f807fd6ae1ebdffa2c85ce9b6a8192962412fba6d5302fe91c", size = 6717044, upload-time = "2026-02-11T14:12:38.259Z" },
+    { url = "https://files.pythonhosted.org/packages/3e/8c/fc3dc4605eddef01d66004752ff8facd9fefc91bce722c62cac45761fac4/pyxel-2.6.5-cp38-abi3-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:5df08ec081d9e7caed8a1e4797a3e40828f5dadcf19f1483ad78a9eec9e922fa", size = 7288674, upload-time = "2026-02-11T14:12:39.597Z" },
+    { url = "https://files.pythonhosted.org/packages/3d/cc/c74777a98df752cc358d42cec02fd8b21500123c917cbdf22a280586a779/pyxel-2.6.5-cp38-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:e055256117f920ff4e85055a197017deb7cb81bce6def77e119476907ea6eae4", size = 6891446, upload-time = "2026-02-11T14:12:41.045Z" },
+    { url = "https://files.pythonhosted.org/packages/a6/03/1114f7e8b6a772a5e615cf9949270fd398e450b1738361c5dead7a4eb94b/pyxel-2.6.5-cp38-abi3-win32.whl", hash = "sha256:3c8fe0c6af8b2880376a43d8e0b12e88f7ab641ad54b5991aaab32f2b125be63", size = 6658525, upload-time = "2026-02-11T14:12:43.753Z" },
+    { url = "https://files.pythonhosted.org/packages/6d/1e/eac14464325860abae86ad302316f28ed87867e06427b4da4aed77a46f19/pyxel-2.6.5-cp38-abi3-win_amd64.whl", hash = "sha256:ad1a9ff2a6c9a78252c5328f8ad0abe040999409ed550249ebff5da9756eb393", size = 6854090, upload-time = "2026-02-11T14:12:42.455Z" },
+]
+
+[[package]]
+name = "tetris"
+version = "0.1.0"
+source = { virtual = "." }
+dependencies = [
+    { name = "pyxel" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "pyxel", specifier = ">=2.6.5" }]
